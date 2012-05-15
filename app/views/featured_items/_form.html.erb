@@ -1,0 +1,70 @@
+
+<%= form_for [@sale, @featured_item] , :html => { :multipart => true }  do |f| %>
+  <% if @featured_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@featured_item.errors.count, "error") %> prohibited this featured_item from being saved:</h2>
+
+      <ul>
+      <% @featured_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+<div class="field">
+    <%= f.label :sample ,'Image'%>
+    <%= f.file_field :sample %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <% @shipping_terms = ShippingTerm.first %>
+  <% if @featured_item.new_record?%>
+  
+    <div class="field" id="bidding_field">
+      <div id='bidding_field_label'><%= f.label :bidding ,'Enable pre-sale bidding '%></div>
+       <div id="bidding_field_input">
+          <%= radio_button("featured_item", "bidding", "1") %> <div class='bidding_field_input_item' style='margin-right:10px;'>Yes</div>
+          <%= radio_button("featured_item", "bidding", "0") %> <div class='bidding_field_input_item'>No</div>
+        </div>
+      <% if @shipping_terms.payment_enabled? && @shipping_terms.featured_item_bidding_cost != 0 %>
+        <p style='color:#336699;margin:0;'>(You will be charged $<%= @shipping_terms.featured_item_bidding_cost %> to enable this feature.)</p>
+      <% end %>
+      <span class="hint">This field can not be edited once item is created</span>
+      
+    </div>
+  <% else %>
+    <div class="field">
+    Enable pre-sale bidding : <%=@featured_item.bidding == 1 ? "Enabled" : "Disabled" %>
+    </div>
+  <% end %>  
+  <div class="field" id="price_div" style=<%='display:none;' unless @featured_item.bidding == 1 %>>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+  <% if @featured_item.new_record?%>
+    <div class="field" id="visible_on_right">
+      <%= f.check_box :visible_on_right %> Advertise this item
+      <% if @shipping_terms.payment_enabled? && @shipping_terms.featured_item_on_right_cost != 0 %>
+        <p style='color:#336699;margin:0;'>(You will be charged $<%= @shipping_terms.featured_item_on_right_cost %> to enable this feature.)</p>
+      <% end %>
+      <span class="hint">This field can not be edited once item is created</span>
+      
+    </div>
+  <% else %>
+    <div class="field">
+      Item Visible on right : <%=@featured_item.visible_on_right ? "Enabled" : "Disabled" %>
+    </div>  
+  <% end %>  
+  <div class="actions">
+    <div class='button_container'><span>&nbsp;</span><%= f.submit "#{@featured_item.new_record? ? 'Create Item' : 'Update Item'}" ,:class => "button"%></div>    
+  </div>
+<% end %>
+

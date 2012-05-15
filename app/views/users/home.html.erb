@@ -1,0 +1,79 @@
+<% unless session[:user_id]%>
+  <div id="main_line">
+    Learn about the 4 simple steps to getting the best gargae sale in your  neighborhood
+  </div>  
+<%end %>  
+<div id="search_box">
+  <div id="post_sale" class="search_boxes">
+    <div class="how_it_works">
+      <h5>How this Works</h5>
+      <ul>
+        <li>1) Select the location of your sale, starting with state to get started.</li>
+        <li>2) Next, give your garage sale a name and select the details of what you are selling and the date/time of your sale.</li>
+        <li>3) Then, use the “bidding” feature to showcase big ticket items.</li>
+		<li>4) Last, visit your account frequently to review/accept bids and review stats leading up to your sale!.</li>
+      </ul>  
+    </div>  
+    <div class="sale_search">
+      <h5>Post Garage Sale</h5>
+      <%= form_tag("sales/post_sale")  do %>
+        <div class="field">
+          <label>State</label>
+            <%= select("sale", "state_id", State.find(:all,:conditions =>["active is true"]).collect {|c| [ c.name.capitalize, c.id ] }, { :include_blank => 'Select a state' },{:onchange => remote_function(:url => {:controller => 'sales',:action => 'load_city'},
+         :with => "'state_id='+this.value+'&home_page=true'"
+         )})
+    		%>
+        </div>
+        <div class="field" id="state_cities_123">
+          <label>City</label>
+          <select name="city_id"><option>Select a city</option></select>
+        </div>
+        <div class="field" id="city_neighborhood">
+          <label>Neighborhood</label>
+          <select name="neighborhood_id"><option>Select a neighborhood</option></select>
+          
+          <%#= select_tag 'neighborhood', options_for_select(Neighborhood.find(:all ,:order =>"name ASC").collect{ |u| [u.name, u.id] })  %>
+        </div>
+        <div class="submit_button">
+          <%=submit_tag %>
+        </div>  
+      <% end %>
+    </div>  
+  </div>
+  <div id="plan_route" class="search_boxes">
+    <div class="how_it_works">
+      <h5>How this Works</h5>
+      <ul>
+        <li>1) Select the location of your sale, starting with state to get started.</li>
+        <li>2) Next, give your garage sale a name and select the details of what you are selling and the date/time of your sale.</li>
+        <li>3) Then, use the “bidding” feature to showcase big ticket items.</li>
+		<li>4) Last, visit your account frequently to review/accept bids and review stats leading up to your sale!.</li>
+      </ul> 
+    </div>
+    <div class="sale_search">
+      <h5>Plan My Route </h5>
+      <% form_tag(plan_sale_sales_path) do %>
+        <div class="field">
+          <label>State</label>
+            <%= select("sale", "state_id", State.find(:all,:conditions =>["active is true"]).collect {|c| [ c.name.capitalize, c.id ] }, { :include_blank => 'Select a state' },{:onchange => remote_function(:url => {:controller => 'sales',:action => 'load_city'},
+         :with => "'state_id='+this.value+'&home_page=true&plan_sale=true'"
+         )})
+    		%>
+        </div>
+        <div class="field" id="state_cities_plan">
+          <label>City</label>
+          <select name="city_id"><option>Select a city</option></select>
+        </div>
+         <div class="field" id="city_neighborhood_plan">
+            <label>Neighborhood</label>
+            <select name="neighborhood_id"><option>Select a neighborhood</option></select>
+
+            <%#= select_tag 'neighborhood', options_for_select(Neighborhood.find(:all ,:order =>"name ASC").collect{ |u| [u.name, u.id] })  %>
+          </div>
+        <div class="submit_button">
+          <%=submit_tag %>
+        </div>  
+      <% end %>
+    </div>
+  </div>
+</div>    

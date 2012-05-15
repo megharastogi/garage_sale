@@ -1,0 +1,99 @@
+<div id="forms">
+<h1>Payment for posting Sale<span id="create_new_account"> (<%=   link_to "Wanna edit your sale details? Click here.", edit_sale_path(@sale) %>)</span></h1>
+
+<p>
+  After you payment is done your Sale will be visible to every one.
+</p>  
+
+<div id="cart">
+  <table>
+    <tr><td>For each Sale we are charging </td><td>$<%=@shipping_terms.post_sale_cost%></td></tr>
+    <% if @sale.stats %>
+    <tr><td>For getting Analytics Report your are charged</td><td>$<%=@shipping_terms.sale_stats_cost%></td></tr>
+    <% end %>
+    <tr>
+      <td id="total">Total</td>
+      <td>$<%= @shipping_terms.post_sale_cost + (@sale.stats ? @shipping_terms.sale_stats_cost : 0 )%></td>
+    </tr>  
+  </table>
+</div>
+<% form_tag ("sale_money_transaction") do %>
+    <% if @creditcard and @creditcard.errors %>
+      <div id="error_explanation">
+        <h2><%=@creditcard.errors.size%> errors prohibited this sale from being saved:</h2>
+        <ul>
+          <% @creditcard.errors.full_messages.each do |c|%>
+          <li>
+            <% if c == "Verification value is required" %>
+              Cvv value is required
+            <% elsif c == "Year expired"%>
+              Credit Card year has expired.
+            <% else%>
+            <%=c%>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>  
+      </div>  
+    <% end %>
+    <div class="field">
+      <%= label_tag "First Name" %>
+      <%= text_field_tag 'creditcard[first_name]', @creditcard ? @creditcard.first_name : '' %>
+    </div>  
+    <div class="field">
+        <%= label_tag "Last Name" %>
+        <%= text_field_tag 'creditcard[last_name]', @creditcard ? @creditcard.last_name : '' %>
+    </div>  
+    <div class="field">
+      <%= label_tag "Card Number" %>
+      <%= text_field_tag 'creditcard[number]' , @creditcard ? @creditcard.number : ''%>
+    </div>  
+    <div class="field">
+      <%= label_tag "Card Type" %>
+      <select name ="creditcard[type]">
+        <option value="visa">Visa</option>
+        <option value="master">MasterCard</option>
+        <option value="american_express">American Express</option>
+      </select>  
+    </div>  
+    <div class="field">
+      <label>Expiration</label>
+      <select name="creditcard[month]">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>  
+      <select name="creditcard[year]">
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+      </select>
+    </div>  
+    <div class="field">
+      <%= label_tag "CVV" %>
+      <%= text_field_tag 'creditcard[verification_value]' %>
+      <%#= f.label :verification_value, 'CVV' %>
+      <%#= f.text_field :verification_value, :size => 4, :maxlength => 4, :style => "width: 50px;" %>
+      <%#= image_tag('cvv.gif', :size => '51x31', :align => 'center', :style => 'vertical-align:bottom') %><br/>
+    </div>  
+    <div class='button_container'><span>&nbsp;</span><%=submit_tag "Pay" , :class => "button"%></div>
+    
+<% end %>
+</div>

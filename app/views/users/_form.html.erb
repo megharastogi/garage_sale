@@ -1,0 +1,92 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+ <div class="field" id="gender">
+	  	<%= f.label :sex  %>
+	  	<%= radio_button("user", "sex", "male")  %> <span style='margin-right:10px;'>Male</span>
+	  	<%= radio_button("user", "sex", "female")  %> <span>Female</span>
+</div>
+  <% if @user.new_record? %>
+ <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+<span class="hint">e.g. myname@example.com. <!-- This will be used to sign-in to your account. --> </span>
+  </div>
+  <% else %>
+    <div class="field">
+      <label>Email</label>
+      <%=@user.email%>
+    </div>
+  <% end %>
+ 
+ <% if @user.new_record?%> 
+  <div class='field'>
+  <%= f.label :password, 'Password' %>
+  <%= f.password_field :password, :size => 20 %>
+  <span class="hint">(Longer than 6 characters and not easy to guess)</span>
+  </div>
+
+
+     <div class='field'>
+  <%= f.label :password_confirmation, 'Confirm' %>
+  <%= f.password_field :password_confirmation, :size => 20 %>
+  <span class="hint">(same as above)</span>
+  </div>    
+<% end %>  
+  <div class="field">
+    <%= f.label :street %>
+    <%= f.text_field :street %>
+  </div>
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :zipcode %>
+    <%= f.text_field :zipcode %>
+  </div>
+  <% unless @user.new_record?%>
+  <div class="field">
+    <%=f.check_box :notification %> <%=link_to "Enable Email notifications",'', :class => "tips2", :title => "To get email notifications when ever someone bids on featured items enable this feature." %>
+  </div>  
+  <% end %>
+  <% if @user.new_record?%>
+   <div class='field' id="terms">
+     <%= f.check_box :terms %>
+     <label>By clicking on 'Create my account' below you are agreeing to the <%=link_to "Terms of Service",terms_of_use_path%> above and the <%=link_to "Privacy Policy",privacy_policy_path%>.</label>
+</div>
+  <% end%>
+
+ 
+  <div class="actions">
+    <% if @user.new_record? %>
+    <div class='button_container'><span>&nbsp;</span><%= f.submit "Create my account" , :class => "button" %></div>
+    
+    
+    <% else%>
+    <div class='button_container'><span>&nbsp;</span><%= f.submit "Update my account", :class => "button" %></div>
+    <% end %>
+  </div>
+<% end %>

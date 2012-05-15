@@ -1,0 +1,234 @@
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var myOptions = {
+		zoom: 9,
+		center: new google.maps.LatLng(33.7489954, -84.3879824),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	var map = new google.maps.Map(document.getElementById("google_list_map"),
+	myOptions);
+
+	setMarkers(map, beaches);
+});
+
+/**
+* Data for the markers consisting of a name, a LatLng and a zIndex for
+* the order in which these markers should display on top of each
+* other.
+*/
+
+var beaches = [
+<% @sales.each_with_index do |sale, index| %>
+<% unless sale.nil? %>
+['<%= sale.name %>', <%= sale.neighborhood.latitude %>, <%= sale.neighborhood.longitude %>,<% index+1 %> ]
+<% unless index == @sales.count - 1 %>
+,
+<% end %>
+
+<% end %>
+
+<% end %>
+];
+
+
+
+
+function setMarkers(map, locations) {
+	// Add markers to the map
+
+	// Marker sizes are expressed as a Size of X,Y
+	// where the origin of the image (0,0) is located
+	// in the top left of the image.
+
+	// Origins, anchor positions and coordinates of the marker
+	// increase in the X direction to the right and in
+	// the Y direction down.
+	var image = new google.maps.MarkerImage('/images/pin.png',
+	// This marker is 20 pixels wide by 32 pixels tall.
+	new google.maps.Size(20, 32),
+	// The origin for this image is 0,0.
+	new google.maps.Point(0,0),
+	// The anchor for this image is the base of the flagpole at 0,32.
+	new google.maps.Point(0, 32));
+	var shadow = new google.maps.MarkerImage('/images/pin.png',
+	// The shadow image is larger in the horizontal dimension
+	// while the position and offset are the same as for the main image.
+	new google.maps.Size(37, 32),
+	new google.maps.Point(0,0),
+	new google.maps.Point(0, 32));
+	// Shapes define the clickable region of the icon.
+	// The type defines an HTML &lt;area&gt; element 'poly' which
+	// traces out a polygon as a series of X,Y points. The final
+	// coordinate closes the poly by connecting to the first
+	// coordinate.
+	var shape = {
+		coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+		type: 'poly'
+	};
+	for (var i = 0; i < locations.length; i++) {
+		var beach = locations[i];
+		var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+		var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			shadow: shadow,
+			icon: image,
+			shape: shape,
+			title: beach[0],
+			zIndex: beach[3]
+		});
+	}
+}
+</script>
+
+<div id="sale_listing_page">
+  <% if params[:action] == "index"%>
+    <h1>All Sales</h1>
+     <p  id="sales_intro">  Grab the latest sale before any one else can.
+    <%=link_to "Start Date" , sales_path(:sale_order => "start_date") ,:class =>"tips2",:id => "sale_order_start" , :title => "Sort the sale's on the basis of start date of the sales."%>
+     <%=link_to "End Date" , sales_path(:sale_order => "end_date") ,:class => "tips2",:id => "sale_order_end",:title => "Sort the sale's on the basis of end date of the sales."%></p>
+  <% elsif params[:action] == "my_fav_sales"%>
+    <h1>Your Favorite Sales</h1>
+    <p id="sales_intro">
+        View all your favorite sales.
+       <%=link_to "Start Date" , my_fav_sales_sales_path(:sale_order => "start_date") ,:class =>"tips2",:id => "sale_order_start" , :title => "Sort the sale's on the basis of start date of the sales."%>
+        <%=link_to "End Date" , my_fav_sales_sales_path(:sale_order => "end_date") ,:class => "tips2",:id => "sale_order_end",:title => "Sort the sale's on the basis of end date of the sales."%>
+      </p>
+  <% elsif params[:action] == "my_sales"%>
+    <h1>Your Sales</h1>
+    <p  id="sales_intro">  These are the sales create by you.
+   <%=link_to "Start Date" , my_sales_sales_path(:sale_order => "start_date") ,:class =>"tips2",:id => "sale_order_start" , :title => "Sort the sale's on the basis of start date of the sales."%>
+    <%=link_to "End Date" , my_sales_sales_path(:sale_order => "end_date") ,:class => "tips2",:id => "sale_order_end",:title => "Sort the sale's on the basis of end date of the sales."%></p>
+  <% else%>
+      <h1>Plan my route!</h1>
+      <p id="sales_intro">Grab the latest sale before any one else can.
+      <% if params[:action] == "search"%>
+        <%=link_to "Start Date" , search_sales_path(:sale_order => "start_date") ,:class =>"tips2",:id => "sale_order_start" , :title => "Sort the sale's on the basis of start date of the sales."%>
+        <%=link_to "End Date" , search_sales_path(:sale_order => "end_date") ,:class => "tips2",:id => "sale_order_end",:title => "Sort the sale's on the basis of end date of the sales."%>
+      <% end %>  
+      </p>
+  <% end %>  
+  
+  <div id="list_block">
+    <ul>
+      <%unless @sales.blank? %>
+      <% @sales.each_with_index do |s,index|%>
+        <li class="post_sale_list">
+     
+          <div class="post_sale_left">
+            
+              <% params[:page] ? @page_number = (params[:page].to_i - 1 ) : @page_number = 0%>
+            <div class="sale_list_heading"><%=index + 1 + (@page_number * 5)%>) <span><%=link_to "#{s.name}" , sale_path(s) %></span>
+				<% if  session[:user_id] %>
+				<p><%=link_to "View Sale directions" , get_directions_sale_path(s),:class=>"view_direction_link" %></p>
+					<% end %>
+	</div>
+            <% if s.city %>
+            <div class="sale_info_neighborhood"><label>City:</label>
+                <%=s.city.name %>
+            </div>
+            <% end %>
+            <% if s.neighborhood %>
+            <div class="sale_info_neighborhood"><label>Neighborhood:</label>
+                <%=s.neighborhood.name %>
+            </div>
+            <% end %>  
+            
+            <div class="sale_info_neighborhood"><label>Criteria</label>
+              <p><%=s.categories.collect{|c| c.name}.join(', ') %><p>
+            </div>
+          </div>
+          <div class="post_sale_right">
+            <div class="sale_to_from">
+              Start Date: 
+              <%=s.start_date%>
+              <br/>
+              End Date: <%=s.end_date%>
+            </div>  
+         
+          </div>   
+          <%if s.featured_items %>
+            <div class="sale_featured_items">Featured Items : <%=s.paid_featured_items.size%></div>
+          <% end %>  
+		<% if @user and  s.user_id !=  @user.id %>
+          <div class="thumbs_up">
+            <% if @user && @user.fav_sales(s)%>
+              <%=image_tag('disable_thumbs_up.png')%>
+            <% else %>
+              <%=link_to "thumbs_up" , add_to_favorite_sale_path(s.id) , :title => "Add to your favorite"%>
+            <% end %>
+          </div>  
+          <div class="thumbs_down">
+            <% if @user && @user.fav_sales(s)%>
+              <%=link_to "thumbs_down" , remove_favorite_sale_path(s.id) , :title => "Remove the sale from your favorite"%>
+            <% else %>
+              <%=image_tag('disable_thumbs_down.png')%>
+            <% end %>
+          </div>
+		<% end %>
+          <div class="sale_address_link">
+            <%= link_to '' , sale_path(s) ,:class => "tips2",:title => "#{s.street + ', ' + s.zipcode}"%>
+          </div>  
+          <% if s.visible%>
+            
+             <%if s.end_date %>
+               <% @end_date = "#{s.end_date.year}-#{s.end_date.month}-#{s.end_date.day} #{s.time_to.hour}:#{s.time_to.min}".to_datetime %>
+               <% if @end_date < Time.now %>
+               <div class="sale_over_posted <%= (@user && @user.fav_sales(s)) ? 'sale_over_with_fav' : '' %>">Sale is over.</div>
+               <% end%>
+            <% end %>
+            <% if @user && @user.fav_sales(s) %>
+              <div class="sale_fav_posted">Favorite sale</div>
+            <% end %>
+          <% else %>
+            <div class="sale_not_posted">Not Posted</div>
+          <% end %>
+        </li>
+      <% end %>  
+    <%else%>
+      <li class="post_sale_list">
+        <% if params[:action] == "my_fav_sales"%>
+          There are no sales in your favorites.
+        <% elsif params[:action] == "my_sales"%>
+          There are no sale created by you.  
+        <% else%>
+          There are no sales for your specifications.
+        <% end %>
+      </li> 
+    <% end %>   
+    </ul>  
+    <%=will_paginate @sales%>
+  </div>
+  <div id="google_list_map">
+    <%=image_tag 'large_staticmap.png' %>
+  </div>
+  <div id="featured_list_block">
+    <ul>
+      <% if @featured_items %>
+        <% @featured_items.each do |f| %>
+           <li class="feature_list">
+              <div class="feature_list_img">
+                <%= image_tag(f.sample.url(:thumb))%>
+              </div>  
+              <div class="feature_list_name">
+                <%=link_to truncate(f.name,:length => 22) , sale_path(f.sale)%>
+              </div>  
+              <div class="feature_list_price">
+               Current Price : <%=number_to_currency(f.price)%>
+              </div>  
+            </li>
+        <% end%>
+      <% end %>  
+    </ul>  
+  </div>      
+  <div id="print_links">
+      <input type="button" value=" Print this page" onclick="window.print();"/><br/>
+    <%=link_to "" ,email_list_sales_path(:sales => @sales) %>
+  </div>
+</div>
+
+<%#= link_to 'New Sale', new_sale_path %>

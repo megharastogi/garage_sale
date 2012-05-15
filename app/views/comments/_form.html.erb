@@ -1,0 +1,23 @@
+<%= form_for [@sale, @comment]  do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :body , "Comment" %>
+    <span class='form_text_area'><%= f.text_area :body %></span>
+  </div>
+  <div class="actions">
+     <div class='button_container'><span>&nbsp;</span><%= f.submit "#{@comment.new_record? ? 'Create Comment' : 'Update Comment'}",:class=>"button" %></div>
+    
+  </div>
+<% end %>
+

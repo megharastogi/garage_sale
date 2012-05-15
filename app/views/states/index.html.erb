@@ -1,0 +1,36 @@
+<h3>Listing states</h3>
+
+<table  class="admin_table">
+  <tr>
+    <th>State</th>
+    <th>Cities</th>
+    <th>Action</th>
+  </tr>
+
+<% @states.each do |state| %>
+
+<tr class="odd">
+    <td><%=state.name%></td>
+    <td> </td>
+    <td>
+        <%= link_to 'Add City', new_city_path(:state_id => state.id) %> |
+        <%= link_to 'Edit', edit_state_path(state) %> |
+        <%= link_to 'Destroy', deactivate_state_path(state), :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+  </tr>
+  <% unless state.cities.blank? %>
+    <% state.active_cities.each do |c| %>
+    <tr>
+      <td> </td>
+      <td><%= c.name %></td>
+      <td><%= link_to 'Edit', edit_city_path(c) %> |
+      <%= link_to 'Destroy', deactivate_city_path(c) %></td>
+    </tr>  
+    <% end %>  
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New State', new_state_path %>

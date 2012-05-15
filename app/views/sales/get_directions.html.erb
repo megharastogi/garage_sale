@@ -1,0 +1,33 @@
+<script type="text/javascript"> 
+	// Create a directions object and register a map and DIV to hold the 
+    // resulting computed directions
+
+   
+
+	$(document).ready(function() {
+	 var map;
+	    var directionsPanel;
+	    var directions;
+
+	    
+	      map = new GMap2(document.getElementById("map_canvas_directions"));
+	      map.setCenter(new GLatLng(<%= @sale.neighborhood.latitude %>,<%= @sale.neighborhood.longitude %>), 12);
+	      directionsPanel = document.getElementById("route");
+	      directions = new GDirections(map, directionsPanel);
+	      directions.load("from: <%= @sale.street.to_s  + 'Atlanta , GA' + ', ' + @sale.zipcode.to_s %> to: <%= @user.street.to_s + ' , '+ @user.city.to_s+ ', GA ,'   + @user.zipcode.to_s%> ");
+	   
+	});
+
+    </script>
+
+<h1><span id="sale_name_heading"><%= link_to "Sale Details Page: #{@sale.name}", sale_path(@sale)%></span></h1><br/><br/>
+    <div id="map_canvas_directions" style="width: 70%; height: 550px; float:left; border: 1px solid black;"></div>
+    <div id="route" style="width: 25%; height:480px; float:right; border; 1px solid black;"></div>
+    <br/>
+	<div id="print_links">
+	      <input type="button" value="Print this page" style="float:left;margin-top:15px;" onclick="window.print();"/><br/>
+	   
+	  </div>
+<script src="http://maps.google.com/maps?file=api&v=2.x&key=ABQIAAAA63UuWBQbK1WhrSVcG8ysKRTqU8rsgJ3xaRDEq4Uy2DpaUf1tdhSBMJJgEWuPIruRV51Ua8qnv452XQ&sensor=false"
+      type="text/javascript"></script>
+

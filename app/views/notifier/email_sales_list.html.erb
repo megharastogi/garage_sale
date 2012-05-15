@@ -1,0 +1,19 @@
+Hi <%= @recipient.full_name %>,
+<br/><br/>
+<%@sales.each_with_index do |f,index|%>
+  
+  <% @sale = Sale.find_by_id(f)%>
+  <%=index+1%>)<%=link_to @sale.name, url_for(sale_url(@sale)),:target => "_blank" %> <br/>
+  <% if @sale.neighborhood%>
+    Neighborhood:<%=@sale.neighborhood.name%><br/>
+  <% end %>  
+  Criteria:<%=@sale.categories.collect{|c| c.name}.join(',') %><br/>
+  ----------------------------------------------------------------------<br/><br/>
+  
+<%end %>
+<br/>
+Thank you,<br/>
+The Garage Sale Team<br/>
+<br/>
+<br/>
+This is a post-only mailing. Replies to this message are not monitored or answered.

@@ -1,0 +1,34 @@
+<h3>Listing users</h3>
+
+<table class="admin_table">
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Sex</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>Zipcode</th>
+    <th>State</th>
+    <th>Account type</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+
+<% @users.each do |user| %>
+<tr class="<%=cycle('even','odd')%>">
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.sex %></td>
+    <td><%= user.street %></td>
+    <td><%= user.city %></td>
+    <td><%= user.zipcode %></td>
+    <td><%= user.state %></td>
+    <td><%= user.account_type %></td>
+    <td><%= user.email %></td>
+    <td><%= link_to 'Show', user %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

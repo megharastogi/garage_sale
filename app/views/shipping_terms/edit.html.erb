@@ -1,0 +1,47 @@
+<div id="forms">
+<h1>Editing Shipping Terms</h1>
+
+<%= form_for(@shipping_term) do |f| %>
+  <% if @shipping_term.errors.any? %>
+    <div id="errorExplanation">
+      <h2><%= pluralize(@shipping_term.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @shipping_term.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+     <%=f.label :payment_enabled , "PAYMENT" %>
+     <%=f.check_box :payment_enabled %>
+   </div>
+  <div class="field">
+     <%=f.label :post_sale_cost %>
+     <%=f.text_field :post_sale_cost %>
+   </div>
+   <div class="field">
+     <%=f.label :sale_stats_cost %>
+     <%=f.text_field :sale_stats_cost %>
+   </div>
+  <div class="field">
+    <%=f.label :featured_item_cost %>
+    <%=f.text_field :featured_item_cost %>
+  </div>  
+  <div class="field">
+    <%=f.label :featured_item_bidding_cost %>
+    <%=f.text_field :featured_item_bidding_cost %>
+  </div>
+  <div class="field">
+    <%=f.label :featured_item_on_right_cost %>
+    <%=f.text_field :featured_item_on_right_cost %>
+  </div>
+ 
+  <div class="field">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', categories_path %>
+</div>

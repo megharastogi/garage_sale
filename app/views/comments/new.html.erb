@@ -1,0 +1,77 @@
+<div id="sale_show_page">
+  <h1>Sale Details Page: <%=link_to @sale.name,sale_path(@sale) %><span id="sale_count">Views: <%=@sale.sale_views_count%></span></h1>
+  <div id="sale_show_left">
+    
+     <div id="sale_show_time">
+       <% if @sale.visible%>
+         <% if @end_date%>
+
+           <% if @end_date < Time.now%>
+             <p>This sale is over.</p>
+           <% else%>
+             Only <span><%= distance_of_time_in_words(Time.now.utc, @end_date, include_seconds = false) %></span> left for this sale to end !!!
+           <% end %>
+         <% else %>
+           &nbsp;
+         <% end %>  
+       <% else %>
+        <p>This sale is not posted yet!</p>
+       <% end %>
+        
+      </div>
+    <div id="sale_show_address">  
+    
+      <% if @sale.user_id == @user.id && @sale.stats%>
+        <p id="sale_stats_link"><%=link_to "View Sale Stats" , sale_stats_sale_path(@sale)%>
+      <% end %>    
+      <p><label>State: </label><%=@sale.state.name %> </p>
+      <p><label>City: </label><%=@sale.city.name %> </p>
+      <%if @sale.neighborhood %>
+      
+      <p>
+        <label>Neighborhood: </label>
+        
+        <%= @sale.neighborhood.name%>
+      </p>
+      <%end%>
+      
+        <p>
+          <label>Timing</label>
+          <%= @sale.time_from.strftime("%I:%M%p") %> - <%= @sale.time_to.strftime("%I:%M%p") %>
+        </p>
+        <p>
+          <label>Address</label>
+          <%= @sale.street + ", " + @sale.zipcode %>
+ 
+        </p>
+    </div>
+    <div id="sale_show_category">
+      <label>Criteria</label>
+      <ul>
+      <% @sale.categories.each do |c|%>
+        <li><%=c.name %></li>
+      <% end %>
+      </ul>
+    </div>
+    <div id="sale_show_description">
+      <label>Description</label>
+      <p>
+        <%=@sale.description %>
+      </p>
+    </div>
+  </div>
+  <div id="comment_new">
+
+  <div id="forms">
+  <h1>Add comment</h1>
+
+  <%= render 'form' %>
+
+  </div>
+  </div>
+ 
+</div>
+
+
+
+

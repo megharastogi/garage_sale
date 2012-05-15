@@ -1,0 +1,34 @@
+<div id="sale_show_page">
+  <h1>Sale Stats Page: <%=link_to @sale.name , sale_path(@sale) %></h1>
+
+  <div id="sale_stats">
+    
+    <div id="sale_show_address">
+      <p><label>Number of views :</label> <%=@sale.sale_views_count %></p>
+      <p><label>Number of times being added to favorite : </label><%=@sale.favorite_sales.size%></p>
+      <p><label>Number of Comments on this sale : </label><%=@sale.comments.size%></p>
+      <%if @sale.featured_items%>
+      <p><label>Number of Featured Items : </label><%=@sale.featured_items.size %></p>
+      <%end%>
+    </div>
+    <% if @sale.featured_items%>
+    
+      <% @sale.featured_items.each do |f|%>
+        <div id="sale_show_category">
+          <label><%=f.name %></label><br/>
+          <% if f.bidding %>
+            Featured Item Cost :$<%=f.price %><br/>
+            Featured Item Number of biddings :<%=f.user_biddings.size %><br/>
+            Featured Item Status : <%= f.sold ? 'Sold' : 'Not Sold'%><br/>
+            <% if f.sold %>
+              <%@bid = UserBidding.find_by_id(f.user_bidding_id)%>
+              Featured Item sold to : <%= @bid.user.first_name %><br/>
+              Featured Item sold In Price : $<%= @bid.bid%><br/>
+            <% end %>
+          <% end %>  
+        </div>
+        <br/>
+      <% end %>
+    <% end %>  
+  </div>  
+</div>  

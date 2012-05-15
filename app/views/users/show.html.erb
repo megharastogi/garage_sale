@@ -1,0 +1,94 @@
+<div id='user_my_account'>
+<div id="user_show">
+  <h1> Your Account Details</h1>
+  
+<div id="sale_show_address">
+    <% unless session[:account_type] == "admin"%>
+    
+    <div id="user_edit_button"><%= link_to 'Edit', edit_user_path(@user) %></div>
+    <% end %>
+<p>
+  <label>First name:</label>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <label>Last name:</label>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <label>Email:</label>
+  <%= @user.email %>
+</p>
+
+<p>
+  <label>Sex:</label>
+  <%= @user.sex %>
+</p>
+
+<p>
+  <label>Street:</label>
+  <%= @user.street %>
+</p>
+
+<p>
+  <label>City:</label>
+  <%= @user.city %>
+</p>
+
+<p>
+  <label>Zipcode:</label>
+  <%= @user.zipcode %>
+</p>
+
+<p>
+  <label>State:</label>
+  <%= @user.state %>
+</p>
+
+<p>
+  <label>Notifications</label>
+  <%= @user.notification ? "Enabled" : "Disabled" %>
+</p>
+</div>
+</div>
+<% unless session[:account_type] == "admin"%>
+<div id="change_password_form">
+<div id="forms">
+  <h1>Change Password</h1>
+  <% form_for(@user, :url => change_user_password_user_path(@user), :method => :put) do |f| %>
+  
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+      <div class="field">
+          <%= label_tag 'old_password' %>
+          <%= password_field_tag 'old_password', params[:old_password] %>
+      </div>
+      <div class="field">
+           <%= f.label :password %>
+           <%= f.password_field :password%>
+      </div>
+      <div class="field">
+            <%= f.label :password_confirmation , 'Confirmation' %>
+            <%= f.password_field :password_confirmation %>
+      </div>
+      <div class="field">
+         <div class='button_container'><span>&nbsp;</span><%= f.submit "Save", :class => "button" %></div>
+          
+      </div>    
+  <% end %>
+  
+</div>
+</div>
+<% end %>
+</div>

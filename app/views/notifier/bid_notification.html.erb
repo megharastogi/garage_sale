@@ -1,0 +1,11 @@
+Hi <%= @recipient.full_name %>,
+<br/><br/>
+
+Some one has bid on your Featured Item <%= link_to @featured_item.name, url_for(sale_featured_item_url(@featured_item.sale_id,@featured_item))%>.  Please check the featured item to view the there bid.
+<br/><br/>
+
+Thank you,
+The Garage Sale Team
+<br/><br/>
+To change the email notifications setting visit 'My Account' section and disable email notifications.
+This is a post-only mailing. Replies to this message are not monitored or answered.

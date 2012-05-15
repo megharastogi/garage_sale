@@ -1,0 +1,172 @@
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:32:10 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.8ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.8ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:00 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.4ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:01 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.6ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (77.3ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:02 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.7ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:28 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (78.3ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (84.7ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:29 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.8ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:33:30 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.6ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.1ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:34:16 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.4ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.5ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.5ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:34:17 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.1ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:34:20 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.1ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:36:16 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.6ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.9ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:36:17 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.7ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:36:19 -0700 2012
+
+RuntimeError (!!! Missing the mysql2 gem. Add it to your Gemfile: gem 'mysql2'):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.8ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at Mon Apr 23 10:41:13 -0700 2012
+
+Mysql2::Error (Can't connect to local MySQL server through socket '/opt/local/var/run/mysql5/mysqld.sock' (2)):
+  
+
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.2ms)
+Rendered /Users/megha/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.0ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)
+DEPRECATION WARNING: reset_javascript_include_default is deprecated. Please manipulate config.action_view.javascript_expansions[:defaults] directly. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:14)
+DEPRECATION WARNING: RAILS_ENV is deprecated. Please use ::Rails.env. (called from /Users/megha/project/garage_sale/vendor/plugins/jrails/rails/init.rb:16)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /Users/megha/project/garage_sale/vendor/plugins/paperclip/rails/init.rb. (called from /Users/megha/project/garage_sale/config/environment.rb:5)

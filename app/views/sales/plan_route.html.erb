@@ -1,0 +1,126 @@
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/themes/smoothness/jquery-ui.css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js"></script>
+<script type="text/javascript">
+// var DatePicked = function() {
+//  var from = $("#from");
+//  var to = $("#to");
+//  var days = $("#days");
+// 
+//  var triggeringElement = $(this);
+// 
+//  var fromDate = from.datepicker("getDate");
+// 
+//  var minArrivalDate = new Date();
+//  if (fromDate != null) {
+//    minArrivalDate.setDate(fromDate.getDate() + 1);
+//  } else {
+//    minArrivalDate.setDate(minArrivalDate.getDate() + 1);
+//  }
+//  to.datepicker('option', 'minDate', minArrivalDate);
+// 
+//  var toDate = to.datepicker("getDate");
+// 
+//  if (fromDate != null && toDate != null && triggeringElement.attr("id") != "days") {
+//    var oneDay = 1000*60*60*24;
+//    var difference = Math.ceil((toDate.getTime() - fromDate.getTime()) / oneDay);
+//    days.val(difference);
+//  } else if (fromDate != null && triggeringElement.attr("id") == "days") {
+//    var daysEntered = parseInt(days.val());
+//    if (daysEntered >= 2) {
+//      var newArrivalDate = new Date();
+//      newArrivalDate.setDate(fromDate.getDate() + daysEntered);
+//      to.datepicker("setDate", newArrivalDate);
+//    } else {
+//      alert("Must be greater than 2.");
+//    }
+//  }
+// }
+$(function() {
+	$('#from').datepicker({ 
+    // onSelect: DatePicked
+	});
+	$("#to").datepicker({
+    // onSelect: DatePicked
+	});
+	// $("#days").change(DatePicked);
+	//   DatePicked();
+});
+</script>
+<div id='plan_my_route_form'>
+<div id="forms">
+<h1>Plan My Route </h1>
+
+<%= form_tag(search_sales_path) do |f| %>
+
+  <div class="actions">
+  <div id="new_sale_left">  
+    <div class="field">
+    <%= label_tag "Categories" %>
+      <% Category.find(:all,:conditions =>["active is true"],:order => "name  ASC").each do |category| %>
+      	<%= check_box_tag 'sale[category_ids][]', category.id , checked = @selected_categories.include?(category.id.to_s)%> <%= category.name %><br/>
+      <% end %>
+    </div>
+      
+  </div>  
+  <div id="new_sale_middle">
+    <div class="field">
+      <%= label_tag "State" %>
+      <%= select "sale","state_id", State.find(:all,:conditions =>["active is true"]).collect {|c| [ c.name.capitalize, c.id ] }.sort, {:include_blank => "Select a state"},
+			{:onchange => remote_function(:url => {:action => 'load_city'},
+			 :with => "'state_id='+this.value+'&plan_route=true'"
+			)}%>
+    </div>
+    <div  class="field" id="state_cities_123">
+        <%= label_tag "City" %>
+        <%= select("sale", "city_id", @cities.collect {|c| [ c.name.capitalize, c.id ] }, { :include_blank => 'Select a city' },{:onchange => remote_function(:url => {:action => 'load_neighborhoods'},
+     :with => "'city_id='+this.value+'&plan_route=true'"
+     )})
+		%>
+    </div>
+    <div class="field" id="city_neighborhood">
+        <%= label_tag "Neighborhoods" %>
+         <% @neighborhoods.each do |neighborhood| %>
+    	    <p><%= check_box_tag 'sale[neighborhood_ids][]', neighborhood.id,  checked = (@selected_neighborhoods == neighborhood.id) %> <%= neighborhood.name %></p>
+         <% end %>
+    </div>
+  </div>
+  <div id="new_sale_right"> 
+    <div class="field">
+      <%= label_tag "Start Date" %>
+      <%=text_field_tag "start_date",'', :id => "from" ,:readonly=>true %>
+  	</div>
+  	<div class="field">
+      <%= label_tag "End Date" %>
+      <%=text_field_tag "end_date",'', :id => "to" ,:readonly=>true %>
+  	</div>
+<div class="field">
+	<%= label_tag "Time From" %>
+	<%= time_select 'sale', 'time_from', {:prompt => {:hour => '00', :minute => '00'},:minute_step => 15,:twelve_hour => true} %>
+  
+	<%#= time_select "" , :minute_step => 15,:twelve_hour => true%>
+</div>
+
+
+<!-- ,:prompt => {:hour => '00', :minute => '00'} -->
+<div class="field">
+	<%= label_tag "Time To" %>
+	<%= time_select 'sale', 'time_to', {:prompt => {:hour => '00', :minute => '00'}, :minute_step => 15,:twelve_hour => true} %>
+	
+	<%#= time_select "time_to", :minute_step => 15,:twelve_hour => true %>
+</div>
+  	<!-- <div class="field">
+  	        <label>Days</label>
+  	        <input type="text" name ="days" id= "days">
+  	   </div>
+  	    -->
+  	    <div class='button_container'><span>&nbsp;</span><%= submit_tag "Search" ,:class => "button"%></div>
+    
+    
+  </div>
+  </div>
+<% end %>
+
+</div>
+</div>

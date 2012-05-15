@@ -1,0 +1,14 @@
+<div id="forms">
+  <h1>Forgot your password? <span id="create_new_account"> <%= link_to 'Sign in', login_path%></span></h1>
+
+  <p>To reset your password, type the full email address you use to sign in to your Garage Sale Account. </p>
+  <%= form_for  @user, :url=>forgot_password_index_path  do |f| %> 
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email  %><br />
+  </div >
+
+    <div class='button_container'><span>&nbsp;</span><%= f.submit "Recover password" , :class=> "button" %>
+  </div>
+  <% end %>
+</div>

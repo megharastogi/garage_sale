@@ -1,0 +1,139 @@
+<% @shipping_terms = ShippingTerm.first%>
+<div id="payment_details">
+<div id="forms">
+<h1>Payment for posting Featured Items</h1>
+
+<p>
+  After you payment is done your featured items will be visible to every one.
+</p>
+<div id="payment_left">
+<div id="cart">
+ 
+  <table>
+    <tr>
+      <th>Featured Item Name</th>
+      <th>Bidding</th>
+      <th>Display on Right</th>
+      <th>Price</th>
+    </tr>  
+    <% @total = 0%>
+    
+    <% @sale.unpaid_featured_items.each do |f| %>
+    <tr>
+      <td><%=f.name%> </td>
+      <td><%= f.bidding == 1 ? 'Enabled' : 'Disabled' %></td>
+      <td><%=f.visible_on_right ? 'Enabled' : 'Disabled' %> </td>
+      <% @price  = (f.bidding == 1 ? @shipping_terms.featured_item_bidding_cost + @shipping_terms.featured_item_cost : @shipping_terms.featured_item_cost) + (f.visible_on_right ? @shipping_terms.featured_item_on_right_cost : 0)%>
+      <td> $<%=@price%></td>  
+      <% @total = @total + @price %>
+      
+    </tr>  
+    <%end%>
+    <tr>
+      <td colspan=3 id='total'>Total</td>
+      <td>$<%= @total%></td>
+    </tr>  
+    
+  </table>  
+</div>    
+<% form_tag ("money_transaction") do %>
+    <% if @creditcard and @creditcard.errors %>
+      <div id="error_explanation">
+         <h2><%=@creditcard.errors.size%> errors prohibited this sale from being saved:</h2>
+          <ul>
+            <% @creditcard.errors.full_messages.each do |c|%>
+            <li>
+              <% if c == "Verification value is required" %>
+                Cvv value is required
+              <% elsif c == "Year expired"%>
+                Credit Card year has expired.
+              <% else%>
+              <%=c%>
+              <% end %>
+            </li>
+            <% end %>
+          </ul>  
+      </div>  
+    <% end %>
+    <div class="field">
+      <%= label_tag "First Name" %>
+      <%= text_field_tag 'creditcard[first_name]', @creditcard ? @creditcard.first_name : '' %>
+    </div>  
+    <div class="field">
+        <%= label_tag "Last Name" %>
+        <%= text_field_tag 'creditcard[last_name]', @creditcard ? @creditcard.last_name : '' %>
+    </div>  
+    <div class="field">
+      <%= label_tag "Card Number" %>
+      <%= text_field_tag 'creditcard[number]' , @creditcard ? @creditcard.number : ''%>
+    </div>  
+    <div class="field">
+      <%= label_tag "Card Type" %>
+      <select name ="creditcard[type]">
+        <option value="visa">Visa</option>
+        <option value="master">MasterCard</option>
+        <option value="american_express">American Express</option>
+      </select>  
+    </div>  
+    <div class="field">
+      <label>Expiration</label>
+      <select name="creditcard[month]">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>  
+      <select name="creditcard[year]">
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+      </select>
+    </div>  
+    <div class="field">
+      <%= label_tag "CVV" %>
+      <%= text_field_tag 'creditcard[verification_value]' %>
+      <%#= f.label :verification_value, 'CVV' %>
+      <%#= f.text_field :verification_value, :size => 4, :maxlength => 4, :style => "width: 50px;" %>
+      <%#= image_tag('cvv.gif', :size => '51x31', :align => 'center', :style => 'vertical-align:bottom') %><br/>
+    </div>  
+    <div class='button_container'><span>&nbsp;</span> <%=submit_tag "Pay" ,:class => "button"%></div>
+   
+        <%#= f.submit "Pay" , :class=> "pay_money" ,:disable_with => "Pay"%>
+<% end %>
+</div>
+<div id="payment_right">
+  <table>
+    <tr><th colspan=2>Payment Details</th></tr>
+    <tr>
+      <td>For each Featured Item we are charging</td>
+      <td>$<%=@shipping_terms.featured_item_cost%></td>
+    </tr>
+      <tr>
+        <td>For each Featured Item with bidding enabled we are charging</td>
+        <td>$<%=@shipping_terms.featured_item_bidding_cost%></td>
+      </tr>
+        <tr>
+          <td>For each Featured Item on right we are charging </td>
+          <td>$<%=@shipping_terms.featured_item_on_right_cost%></td>
+        </tr>
+  
+  </table>
+  </div>
+</div>
+</div>

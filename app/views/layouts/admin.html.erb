@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>TheGarageSale-Admin</title>
+  <%= stylesheet_link_tag 'reset' , 'admin' %>
+  <%#= javascript_include_tag('jquery-1.4.2.min') %>
+  <%#= javascript_include_tag('jquery.rails') %>
+  <%= javascript_include_tag('application') %>
+</head>
+<body>
+	<!--[if lt IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]--> 
+  <noscript>
+        <div id="noscript-warning">JavaScript must be enabled in order for you to use StartSavvy. However, it seems JavaScript is either disabled or not supported by your browser.</div>
+    </noscript>
+  <div id = "admin_wrapper">
+    <div id="header">
+      <div id="logo">
+        <%= link_to (image_tag "logo.png") , root_path %>
+      </div>
+
+      <div id="other_links">
+        <ul>
+          <li>
+            <% unless session[:user_id].nil? %>
+              <%= @user.full_name %>  | <%= link_to "Logout", logout_path %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <% if flash[:notice] %>
+      <div id="notice">
+        <%= flash[:notice]%>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div id="error">
+        <%= flash[:error]%>
+      </div>
+    <% end %>
+
+    <div id="admin_navigation">
+      <ul>
+        <li><%= link_to "Categories" , categories_path %></li>
+        <li><%= link_to "Users" , users_path %></li>
+        <li><%= link_to "States" , states_path %></li>
+        <li><%= link_to "Messages" , messages_path %></li>
+        <li><%=link_to "Shipping Terms",shipping_term_path(ShippingTerm.find(:first))%></li>
+      </ul>
+    </div>
+
+    <%= yield %>
+  </div>
+
+</body>
+</html>
+

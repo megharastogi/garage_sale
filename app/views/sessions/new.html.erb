@@ -1,0 +1,29 @@
+<div id='login_page'>
+<div id="forms">
+	<div>
+		<h1>Sign in with your
+		Garage Sale Account<span id="create_new_account"> (<%=   link_to "Don't have account? SignUp here.", sign_up_path %>)</span></h1>
+	</div>
+  <%= form_for @user, :as => :user , :url => sessions_create_path do |f| %>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>	
+    <div class="field">
+      <%= check_box_tag "remember", '1'   %>
+      Keep me signed in |
+      <%=   link_to "Can't access your account?", new_forgot_password_path %>
+
+    </div>
+    <br/>
+    <div class="login_submit">
+      <div class='button_container'><span>&nbsp;</span><%= submit_tag "Login" ,:class => "button" %></div>
+    </div>
+    <% end %>
+</div>
+</div>

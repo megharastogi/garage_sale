@@ -1,0 +1,121 @@
+<div id="sale_show_page">
+  <h1><%= link_to "Sale Details Page: #{@sale.name}", sale_path(@sale)%><span id="sale_count">Views: <%=@sale.sale_views_count%></span></h1>
+  <div id="sale_show_left">
+    
+     <div id="sale_show_time">
+       <% if @sale.visible%>
+         <% if @end_date%>
+
+           <% if @end_date < Time.now%>
+             <p>This sale is over.</p>
+           <% else%>
+             Only <span><%= distance_of_time_in_words(Time.now.utc, @end_date, include_seconds = false) %></span> left for this sale to end !!!
+           <% end %>
+         <% else %>
+           &nbsp;
+         <% end %>  
+       <% else %>
+        <p>This sale is not posted yet!</p>
+       <% end %>
+        
+      </div>
+    <div id="sale_show_address">  
+    
+      <% if @featured_item.sale.user_id == @user.id && @sale.stats%>
+        <p id="sale_stats_link"><%=link_to "View Sale Stats" , sale_stats_sale_path(@sale)%>
+      <% end %>    
+      <p><label>State: </label><%=@sale.state.name %> </p>
+      <p><label>City: </label><%=@sale.city.name %> </p>
+       <%if @sale.neighborhood %>
+
+        <p>
+          <label>Neighborhood: </label>
+
+          <%= @sale.neighborhood.name%>
+        </p>
+        <%end%>
+
+          <p>
+            <label>Timing</label>
+            <%= @sale.time_from.strftime("%I:%M%p") %> - <%= @sale.time_to.strftime("%I:%M%p") %>
+          </p>
+          <p>
+            <label>Address</label>
+            <%= @sale.street + ", " + @sale.zipcode %>
+          </p>
+    </div>
+    <div id="sale_show_category">
+      <label>Criteria</label>
+      <ul>
+      <% @sale.categories.each do |c|%>
+        <li><%=c.name %></li>
+      <% end %>
+      </ul>
+    </div>
+    <div id="sale_show_description">
+      <label>Description</label>
+      <p>
+        <%=@sale.description %>
+      </p>
+        
+    </div>
+  </div>
+  <div id="featured_item_show">
+    <% if @featured_item.sold %>
+      <div id="featured_item_show_sold">Sold</div>
+    <% end %>  
+    <div id="featured_item_show_img">
+	<%= image_tag("soldout.png", :class=>"sold_background_image") if @featured_item.sold %>
+<%= image_tag(@featured_item.sample.url(:large)) %></div>
+    <p id ="featured_item_show_name">
+      <%= @featured_item.name %>
+    </p>
+
+    <p id="featured_item_show_description">
+      <%= @featured_item.description %>
+    </p>
+
+
+    <p id="featured_item_show_price">
+      <b>Start Price:</b>
+      <% if @featured_item.bidding == 1%>
+          $<%= @featured_item.price %>
+      <% else %>
+        None
+      <% end %>  
+    </p>
+    <% unless @sale.user_id == session[:user_id] || @featured_item.sold %>
+    
+      <% form_tag bid_sale_featured_item_path(@featured_item.sale.id,@featured_item.id) do %>
+          <%= text_field_tag 'bidding'%>
+          <%=submit_tag "Bid"%>
+      <% end %>
+    <% end %>
+      
+    <% if @featured_item.sale.user_id == @user.id%>
+      <div id="biddings">
+        <%if @biddings %>
+          <h3>User Biddings</h3>
+          <% if @biddings.blank?%>
+            No one has bid on this item yet.
+          <% end%>
+          <% @biddings.each do |b|%>
+            <div class= "user_biddings">
+              <p>
+                <b><%=b.user.first_name %> <%=b.user.last_name %></b> bid <b>$<%=b.bid%></b>
+                <% if @featured_item.user_bidding_id == b.id %>
+                 <span class='featured_item_sold_to'>(Sold)</span>
+                <% end %> 
+              </p>
+            <% if !@featured_item.sold%>
+              <%= link_to "Sell",sell_sale_featured_item_path(@featured_item.sale_id,b.featured_item_id,:bid => b.id)%>
+            <% end %>  
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>  
+    
+  </div>
+</div>
+

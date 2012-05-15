@@ -1,0 +1,15 @@
+Hi <%= @recipient.full_name %>,
+<br/><br/>
+
+Congratulations! You won the bid at $<%= @bid %>. Take a look at your new featured item <%= link_to @featured_item.name, url_for(sale_featured_item_url(@featured_item.sale_id,@featured_item))%>.
+<br/><br/>
+
+The seller will contact you to arrange pick-up. 
+
+<br/><br/>
+
+Thank you,
+The Garage Sale Team
+<br/><br/>
+
+This is a post-only mailing. Replies to this message are not monitored or answered.

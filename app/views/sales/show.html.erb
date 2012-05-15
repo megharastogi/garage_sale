@@ -1,0 +1,244 @@
+<script type="text/javascript"
+src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var myLatlng = new google.maps.LatLng(<%= @sale.latitude %>, <%= @sale.longitude %>);
+	var myOptions = {
+		zoom: 12,
+		center: myLatlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	var map = new google.maps.Map(document.getElementById("sale_show_right"), myOptions);
+
+	var image = '/images/pin.png';
+	var myLatLng = new google.maps.LatLng(<%= @sale.latitude %>, <%= @sale.longitude %>);
+	var beachMarker = new google.maps.Marker({
+		position: myLatLng,
+		map: map,
+		icon: image
+	})
+
+});
+</script>
+
+<div id="sale_show_page">
+  <h1><span id="sale_name_heading"><%= link_to "Sale Details Page: #{@sale.name}", sale_path(@sale)%></span>
+		<% if @user and  @sale.user_id !=  @user.id %>
+    <div class="thumbs_up">
+      <% if @user && @user.fav_sales(@sale)%>
+        <%=image_tag('disable_thumbs_up.png')%>
+      <% else %>
+        <%=link_to "thumbs_up" , add_to_favorite_sale_path(@sale.id,:show_page => true) , :title => "Add to your favorite"%>
+      <% end %>
+    </div>  
+    <div class="thumbs_down">
+      <% if @user && @user.fav_sales(@sale)%>
+        <%=link_to "thumbs_down" , remove_favorite_sale_path(@sale.id,:show_page => true) , :title => "Remove the sale from your favorite"%>
+      <% else %>
+        <%=image_tag('disable_thumbs_down.png')%>
+      <% end %>
+    </div>
+     <% end %>
+    <span id="sale_count">Views: <%=@sale.sale_views_count%></span>
+  </h1>
+  <div id="sale_show_left">
+    <div id="sale_show_time">
+      <% if @sale.visible%>
+        <% if @end_date %>
+      
+          <% if @end_date < Time.now%>
+            <p>This sale is over.</p>
+          <% else%>
+            Only <span><%= distance_of_time_in_words(Time.now.utc, @end_date, include_seconds = false) %></span> left for this sale to end !!!
+          <% end %>
+        <% else %>
+          &nbsp;
+        <% end %>  
+      <% else %>
+       <p>This sale is not posted yet!</p>
+      <% end %>    
+    </div>
+    <div id="sale_show_address">
+      <% if  session[:user_id] == @sale.user_id && @sale.stats%>
+        <p id="sale_stats_link"><%=link_to "View Sale Stats" , sale_stats_sale_path(@sale)%>
+      <% end %>
+<% if  session[:user_id] %>
+<p><%=link_to "View Sale directions" , get_directions_sale_path(@sale)%>
+	<% end %>
+
+      <p><label>State: </label><%=@sale.state.name %> </p>
+      <p><label>City: </label><%=@sale.city.name %> </p>
+      <% if @sale.neighborhood %>
+      <p>
+        <label>Neighborhood: </label>
+        <%= @sale.neighborhood.name %>
+      </p>
+      <%end %>
+      <p>
+        <label>Timing</label>
+        <%= @sale.time_from.strftime("%I:%M%p") %> - <%= @sale.time_to.strftime("%I:%M%p") %>
+      </p>  
+      <p>
+        <label>Address</label>
+        <%= @sale.street + ", " + @sale.zipcode %>
+      </p>  
+	<p>
+		<label> Start Date: </label>
+         
+          <%=@sale.start_date%>
+          <br/>
+<label>End Date:</label>
+           <%=@sale.end_date%>
+       
+		</p>
+    </div>
+    <div id="sale_show_category">
+      <label>Criteria</label>
+      <ul>
+      <% @sale.categories.each do |c|%>
+        <li><%=c.name %></li>
+      <% end %>
+      </ul>
+    </div>
+    <div id="sale_show_description">
+      <label>Description</label>
+      <p>
+        <%= @sale.description %>
+      </p>
+    </div>
+  </div>
+  <div id="sale_show_right">
+
+  </div>
+  </div>
+<% if @featured_items %>
+  <div id="featured_items_show_list">
+    <h3>Featured Items</h3>
+    <ul>
+    <% @featured_items.each do |f| %>
+      <li>
+        <%if f.transaction_id  && session[:user_id] == @sale.user_id %>
+          <% if f.sold %>
+            <div class ="sold_featured_item">Sold</div>
+          <% else%>
+            <div class="posted_featured_item">Posted</div>
+          <% end %>  
+        <% end %>
+        <% if (session[:user_id]== nil || !session[:user_id] != @sale.user_id) && f.sold %>
+          <div class ="sold_featured_item">Sold</div>
+        <% end %>
+        <div class="feature_list_img ">
+			<%= image_tag("soldout.png", :class=>"sold_background_image") if f.sold %>
+          <%= image_tag(f.sample.url(:medium)) %>
+        </div>
+        <div class="feature_list_name">
+          <%=link_to f.name,sale_featured_item_path(@sale,f)%>
+        </div>
+        <div class="feature_list_description">
+          <%= truncate(f.description,:length => 65 )%>
+        </div>
+        <div class="feature_list_price_block">
+          <% if f.bidding == 0%>
+            <div class="feature_list_price">
+              Start Price : None
+            </div>
+          <% else %>
+           
+            <% if @sale.user_id == session[:user_id]%>
+              <div class="feature_list_price">
+                  Start Price : <%= number_to_currency(f.price) %><br/>
+                  Current Price : <%= f.max_bid %>
+              </div>
+              <% if !f.sold%>
+                <div class="sell_featured_item">
+                  <%=link_to "Sell" ,sale_featured_item_path(@sale,f)%>
+                </div> 
+              <% end %> 
+            <% else %>
+              <div class="feature_list_price">
+                   Start Price : <%= number_to_currency(f.price) %><br/>
+                    Current Price : <%= f.max_bid %>
+              </div>
+              <div class="feature_list_price bidding_price">
+                <span>Your Bid : </span>
+                <% form_tag bid_sale_featured_item_path(@sale.id,f.id) do %>
+                  <% if (session[:user_id]== nil || !session[:user_id] != @sale.user_id) && f.sold %>
+                    <%=text_field_tag 'bidding' ,"",:disabled => true %>
+                  <% else %>
+                    <%= text_field_tag 'bidding'%>
+                  <% end %>
+                  <% if (session[:user_id]== nil || !session[:user_id] != @sale.user_id) && f.sold %>
+                    <%=submit_tag "Bid",:disabled => true%>
+                  <% else %>
+                    <%=submit_tag "Bid"%>
+                  <% end %>
+                <% end %>
+              </div>
+            
+            <% end %>
+         <% end %>
+        </div>
+        <% if f.sale.user_id == session[:user_id]%>
+          <div class="featured_items_action" style="margin:5px 0 0 0;">
+            <%= link_to 'Show', sale_featured_item_path(f.sale , f) %> 
+            <% unless f.sold%>
+              |
+              <%= link_to 'Edit', edit_sale_featured_item_path(f.sale , f) %> |
+              <%= link_to 'Delete', sale_featured_item_path(f.sale , f) , :confirm => 'Are you sure?', :method => :delete %>
+            <% end %>  
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+<% if session[:user_id] == @sale.user_id %>
+<% if @sale.visible%>
+
+  <div id="add_featured_button">
+  <% if @sale.featured_items_count < 5 %>
+    <%=link_to "Add Featured Items" , new_sale_featured_item_path(@sale) , :id =>"add_feature_items"%>
+  <% end %>
+    <% if (session[:user_id] == @sale.user_id && @featured_items && !@sale.all_featured_id_paid?)%>
+      <%=link_to "Post Featured Items" , payment_details_sale_path(@sale),:id =>"post_feature_items" %>
+    <% end %>
+  </div>
+<% else%>
+<div id="add_featured_button">
+
+  <%=link_to "Post sale",sale_payment_details_sale_path(@sale),:id =>"post_sale", :class => "tips2", :title => "Post your sale so that it visible to everyone." %>
+  </div>
+<% end %>  
+<% end %>
+
+
+<% if session[:user_id] == @sale.user_id %>
+  <%= link_to 'Edit', edit_sale_path(@sale) %> |
+  <%= link_to 'Back', sales_path %> | <%= link_to 'Delete', deactivate_sale_path(@sale) %>
+<% end %>
+
+<div id="comment_for_sale">
+  <h3>Comments</h3>
+  <% if @sale.comments.blank? %>
+     Be first one to <%= link_to "Add Comment" , new_sale_comment_path(@sale) %>
+  <% else %>
+    <ul>
+    <% @sale.comments.each do |m|%>
+      <li>
+        <div class="message_body">
+          <%= m.body %> <span>Commented By</span> <span class="message_username"><%= m.user.full_name %></span>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+   <%= link_to "Add Comment" , new_sale_comment_path(@sale) %>
+  <% end %>
+</div>
+
+
+

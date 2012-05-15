@@ -1,0 +1,26 @@
+<h3>List of Messages</h3>
+<table class="admin_table" cellspacing=0 , cellpadding=0 , width= 100%>
+	<tr>
+		<th>First name</th>
+	    <th>Last name</th>
+	    <th>Email</th>
+	    <th>Phone</th>
+	    <th>Category</th>
+	    <th>Message</th>
+	</tr>
+	
+	<% @messages.each do |message| %>
+	  <tr class="listing <%=cycle('even','odd')%>">
+	     <td><%= message.first_name %>&nbsp;</td>
+	     <td><%= message.last_name %>&nbsp;</td>
+	     <td><%= message.email %>&nbsp;</td>
+	 	 <td><%= message.phone %>&nbsp;</td>
+	     <td><%= message.category %>&nbsp;</td>
+	     <td><%= message.message %>&nbsp;</td>
+	   
+	  </tr>
+	<% end %>
+</table>
+	<div>	<%= will_paginate @messages  %></div>
+	
+	

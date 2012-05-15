@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>thegaragesaler <%= @title ? ('-' + @title) : '' %></title>
+  <%= stylesheet_link_tag 'reset','style' %>
+  <%= csrf_meta_tag %>
+  <link type='text/css' rel='stylesheet' media='print' href='/stylesheets/print.css'>
+  <%= javascript_include_tag "jquery","jquery.rails", "jquery-ui.min","jrails" ,"jquery.cluetip.min" ,"application"%>
+</head>
+<body>
+	<!--[if lt IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]--> 
+  <noscript>
+        <div id="noscript-warning">JavaScript must be enabled in order for you to use StartSavvy. However, it seems JavaScript is either disabled or not supported by your browser.</div>
+    </noscript>
+  <div id='top_border'>&nbsp;</div>
+  <div id="wrapper">
+    <div id="header">
+      <div id="logo">
+        <%= link_to (image_tag "logo.png") , root_path %>
+      </div>
+      <div id="top_nav">
+        <ul>
+          <li class="<%= (params[:controller]== "users" && params[:action]== "home") ? 'active_left' : '' %>"><%=link_to "HOME" ,root_path%></li>
+          <% if session[:user_id].nil? %>
+            <li class="<%= (params[:controller]== "pages" && params[:action]== "about_us") ? 'active' : '' %>">
+              <%= link_to "ABOUT US" , pages_about_us_path %>
+            </li>
+            
+          <% end %>
+            <li class="<%= (params[:controller]== "sales" && params[:action]== "index") ? 'active' : '' %>"><%=link_to "ALL  SALES" ,sales_path%></li>
+          <li class="<%= (params[:controller]== "sales" && (params[:action]== "plan_route" ||params[:action]== "search") ) ? 'active' : '' %>"><%= link_to "PLAN MY ROUTE" , plan_route_sales_path %></li>
+          <% if session[:user_id].nil? %>
+          <li class="<%= (params[:controller]== "sessions" && params[:action]== "new") ? 'active' : '' %>" id="last_nav"><%= link_to "LOGIN" , login_path %></li>
+          <% else %>
+          <li class="<%= (params[:controller]== "sales" && params[:action]== "new") ? 'active' : '' %>"><%= link_to "POST GARAGE SALE", new_sale_path %>
+          <li id="last_nav"><%= link_to "LOGOUT", logout_path %>
+          </li>
+          <% end %>
+        </ul>
+        <div id="<%= (params[:controller]== "sessions" && params[:action]== "new") ? 'active_right_nav' : 'right_nav' %>">
+          &nbsp;
+        </div>
+      </div>  
+      <% unless session[:user_id].nil? %>
+        <div id="welcome_user">Welcome <%= @user.full_name %>!</div>
+      <% end %>  
+    </div>  
+    <% if session[:user_id]%>
+    <ul id="sub_nav">
+      <li class="<%= (params[:controller]== "sales" && params[:action]== "my_sales") ? 'active' : '' %>"><%=link_to "MY  SALES" ,my_sales_sales_path %></li>
+      <li class="<%= (params[:controller]== "sales" && params[:action]== "my_fav_sales") ? 'active' : '' %>"><%=link_to "MY  FAVORITE  SALES" ,my_fav_sales_sales_path %></li>
+      
+      <li  class="<%= (params[:controller]== "featured_items" && params[:action]== "bidding_items") ? 'active' : '' %>"><%=link_to "MY BIDDINGS",bidding_items_featured_items_path%>
+      <li class="<%= (params[:controller]== "featured_items" && params[:action]== "my_purchase_list") ? 'active' : '' %>"><%=link_to "MY  PURCHASE  LIST" , my_purchase_list_featured_items_path%></li>
+      <li ><%=link_to "MY ACCOUNT",user_path(@user)%></li>
+    </ul>  
+    <% end %>
+    <div class="content">
+      <% if flash[:notice] %>
+      <div id='notice'>	<%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:error] %>
+      <div id='error'><%= flash[:error] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+    <div id="footer">
+      Copyright 2010 somethng company &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Home', root_path %> | <%= link_to 'About Us', pages_about_us_path %> | <%= link_to 'Terms of Use', pages_terms_of_use_path %> |<%= link_to 'Privacy Policy', pages_privacy_policy_path %> |<%= link_to 'Contact Us', new_message_path %>
+    </div>
+  </div>
+
+</body>
+</html>
+

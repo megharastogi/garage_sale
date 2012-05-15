@@ -1,0 +1,75 @@
+<div id="featured_items_show_list">
+  <h3>Featured Items</h3>
+  <ul>
+  <% unless @featured_items.blank? %>  
+    <% @featured_items.each do |f| %>
+      <li>
+            <% if f.sold %>
+              <div class ="sold_featured_item">Sold</div>
+            <% end%>
+       
+        <div class="feature_list_img">
+          <%= image_tag(f.sample.url(:thumb)) %>
+        </div>
+        <div class="feature_list_name">
+          <%= link_to f.name,sale_featured_item_path(f.sale_id,f)%>
+        </div>
+        <div class="feature_list_description">
+          <%= truncate(f.description,:length => 65 )%>
+        </div>
+        <% @allbidding = UserBidding.find(:all,:conditions => ['user_id = ? and featured_item_id = ? ',session[:user_id], f.id])%>          
+        Your Biddings:<br/>
+        <% @allbidding.each_with_index do |ab,i|%>
+          <%=i+1%>)<%=ab.bid%>$<br/>
+        <% end%>
+        <div class="feature_list_price_block">
+          <% if f.bidding == 0%>
+            <div class="feature_list_price">
+              Bidding Price : None
+            </div>
+          <% else %>
+         
+              <div class="feature_list_price">
+                     Start Price : <%= number_to_currency(f.price) %><br/>
+                      Current Price : <%= f.max_bid %>
+              </div>
+              <div class="feature_list_price bidding_price">
+                <span>Your Bid : </span>
+                  
+                 <% form_tag bid_sale_featured_item_path(f.sale.id,f.id) do %>
+                    <% if f.sold %>
+                      <%=text_field_tag 'bidding' ,"",:disabled => true %>
+                    <% else %>
+                      <%= text_field_tag 'bidding'%>
+                    <% end %>
+                    <% if f.sold %>
+                      <%=submit_tag "Bid",:disabled => true%>
+                    <% else %>
+                      <%=submit_tag "Bid"%>
+                    <% end %>
+                  <% end %>
+              </div>
+          
+            <% end %>
+        </div>
+        <% if f.sale.user_id == session[:user_id]%>
+          <div class="featured_items_action" style="margin:5px 0 0 0;">
+            <%= link_to 'Show', sale_featured_item_path(f.sale , f) %> |
+            <%= link_to 'Edit', edit_sale_featured_item_path(f.sale , f) %> |
+            <%= link_to 'Delete', sale_featured_item_path(f.sale , f) , :confirm => 'Are you sure?', :method => :delete %>
+          </div>
+        <% end %>
+      </li>
+      <% end %>
+  <% else%>
+    <p id='no_bidding_item'>
+      <% if params[:action] == "my_purchase_list"%>
+        You have not purchased any featured item yet.
+      <% else %>
+        You have not bid on any featured item yet.
+      <% end %>
+    </p>
+  <% end%>
+  </ul>
+</div>
+

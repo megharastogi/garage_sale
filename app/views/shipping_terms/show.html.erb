@@ -1,0 +1,33 @@
+<div id="forms">
+<h1>Shipping Terms:</h1>
+<table class="admin_table">
+  <tr class="even">
+    <td>PAYMENT</td> 
+    <td><%=@shipping_term.payment_enabled ? 'Enabled' : 'Disabled'%></td>
+  </tr>
+  <tr class="odd">
+    <td>Post Sale Cost</td>
+    <td>$<%=@shipping_term.post_sale_cost%> </td>
+  </tr>  
+  <tr>
+     <td>Sale Stats Cost</td>
+     <td>$<%=@shipping_term.sale_stats_cost%></td>
+   </tr>
+   <tr class="odd">
+      <td>Featured Items Posting Cost</td>
+      <td>$<%=@shipping_term.featured_item_cost%></td>
+    </tr>
+    <tr>
+       <td>Featured Items Bidding Cost</td>
+       <td>$<%=@shipping_term.featured_item_bidding_cost%> </td>
+     </tr>
+     <tr class="odd">
+        <td>Featured Items On Right Cost</td>
+        <td>$<%=@shipping_term.featured_item_on_right_cost%> </td>
+      </tr>    
+
+</table>
+<br/>
+<br/>
+<%= link_to 'Edit', edit_shipping_term_path(@shipping_term) %> 
+</div>

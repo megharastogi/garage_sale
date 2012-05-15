@@ -1,0 +1,9 @@
+<div id="forms">
+<h1>City:<%= @city.name %></h1>
+
+Neighborhoods:  <%=@city.neighborhoods.collect{|a| a.name}.join(',')%>
+<br/>
+<br/>
+<%= link_to 'Edit', edit_city_path(@city) %> |
+<%= link_to 'Back', states_path %>
+</div>
